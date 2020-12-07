@@ -31,6 +31,11 @@ class Deck:
             for rank in ranks:
                 created_card = Card(suit, rank)
                 self.all_cards.append(created_card)
+    def shuffle_deck(self):
+        #shuffle instance of created deck with random
+        random.shuffle(self.all_cards)
 
+        
 new_deck = Deck()
+new_deck.shuffle_deck()
 print(new_deck.all_cards[0])
