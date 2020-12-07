@@ -20,3 +20,17 @@ class Card:
 ace_of_spades = Card('Spades', 'Ace')
 two_of_hearts = Card('Hearts','Two')
 
+#Deck Class
+class Deck:
+    #create deck
+    def __init__(self):
+        #all cards list
+        self.all_cards = []
+        #for loop suit and rank iteration
+        for suit in suits:
+            for rank in ranks:
+                created_card = Card(suit, rank)
+                self.all_cards.append(created_card)
+
+new_deck = Deck()
+print(new_deck.all_cards[0])
