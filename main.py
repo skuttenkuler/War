@@ -34,8 +34,11 @@ class Deck:
     def shuffle_deck(self):
         #shuffle instance of created deck with random
         random.shuffle(self.all_cards)
+    def deal_one(self):
+        #return single card from top of deck or end of list
+        return self.all_cards.pop()
 
-        
 new_deck = Deck()
 new_deck.shuffle_deck()
-print(new_deck.all_cards[0])
+mycard = new_deck.deal_one()
+print(mycard)
