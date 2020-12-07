@@ -37,8 +37,31 @@ class Deck:
     def deal_one(self):
         #return single card from top of deck or end of list
         return self.all_cards.pop()
+#Player Class
+class Player:
+    def __init__(self, name):
+        self.name = name
+        self.all_cards = []
+    def remove(self):
+        return self.all_cards.pop(0)
+    def add_cards(self, new_cards):
+        #check if player has a list of cards or not
+        if type(new_cards) == type([]):
+            #add cards to player "hand"
+            self.all_cards.extend(new_cards)
+        else:
+            #if no "hand" add cards to player
+            self.all_cards.append(new_cards)
+    def __str__(self):
+        return f'Player {self.name} has {len(self.all_cards)} cards.'
 
 new_deck = Deck()
 new_deck.shuffle_deck()
 mycard = new_deck.deal_one()
-print(mycard)
+new_player = Player("Sam")
+print(new_player)
+new_player.add_cards(mycard)
+print(new_player)
+new_player.add_cards([mycard, mycard,mycard])
+new_player.remove
+print(new_player.all_cards)
