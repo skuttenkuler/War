@@ -55,13 +55,81 @@ class Player:
     def __str__(self):
         return f'Player {self.name} has {len(self.all_cards)} cards.'
 
+
+'''
+GAME
+'''
+#Setup Game
+player_one = Player("one")
+player_two = Player("two")
+#create the deck
 new_deck = Deck()
+#shuffle deck
 new_deck.shuffle_deck()
-mycard = new_deck.deal_one()
-new_player = Player("Sam")
-print(new_player)
-new_player.add_cards(mycard)
-print(new_player)
-new_player.add_cards([mycard, mycard,mycard])
-new_player.remove
-print(new_player.all_cards)
+#split the deck between players
+for x in range(26):
+    player_one.add_cards(new_deck.deal_one())
+    player_two.add_cards(new_deck.deal_one())
+game_on = True
+#track rounds
+round_num = 0
+while game_on:
+
+    round_num += 1
+    print(f"Round {round_num}")
+
+    if len(player_one.all_cards) == 0:
+        print('Player One is out of cards. Winner: Player 2')
+    #if P1 loses break loop
+        game_on = False
+        break
+
+    if len(player_two.all_cards) == 0:
+        print('Player Two is out of cards. Winner: Player 1')
+    #if P2 loses break loop
+        game_on = False
+        break
+
+    #start new game round
+    player_one_cards = []
+    player_one_cards.append(player_one.remove())
+    
+    player_two_cards = []
+    player_two_cards.append(player_two.remove())
+
+    
+    at_war = True
+   
+    while at_war:
+         #if P1 wins add cards to hand
+        if player_one_cards[-1].value > player_two_cards[-1].value:
+            player_one.add_cards(player_one_cards)
+            player_one.add_cards(player_two_cards)
+            at_war = False
+        #if P2 wins add cards to hand
+        elif player_two_cards[-1].value > player_one_cards[-1].value:
+            player_two.add_cards(player_one_cards)
+            player_two.add_cards(player_two_cards)
+            at_war = False
+        #if P1 and P2 have same value call war
+        else:
+            print("WAR")
+
+            #if P1 hand is less than 3 declare loser
+            if len(player_one.all_cards) < 3:
+                print("Player 1 must surrender.")
+                print("Player 2 is the winner.")
+                game_on:False
+                break
+            #if P2 hand is less than 3 declare loser
+            elif len(player_two.all_cards) < 3:
+                print("Player 2 must surrender.")
+                print("Player 1 is the winner.")
+                game_on:False
+                break
+            else:
+                for num in range(3):
+                    player_two_cards.append(player_one.remove())
+                    player_two_cards.append(player_two.remove())
+
+    
